@@ -1,51 +1,27 @@
 "use strict";
 
 var plugin_plugin = {
-    // 1. Setup the view container once when the plugin initializes
-    onLoad: function () {
-        // Only inject the main view panel if it doesn't already exist
-        if (!Q('view-helloworld')) {
-            QA('mainView', '<div id="view-helloworld" style="display:none; padding:20px; color:var(--main-text-color, #000);">' +
-                           '<h1>Hello World!</h1>' +
-                           '<p>Welcome to your custom MeshCentral plugin tab.</p>' +
-                           '</div>');
+    // This handles view state changes across the entire MeshCentral UI
+    onViews: function (view, state) {
+        // 'view-plugin_plugin' is the ID of the view area container 
+        // that MeshCentral automatically opens when your plugin is clicked in the list.
+        if (view == 'plugin_plugin') {
+            
+            // 1. Create a clean container inside the view so we don't duplicate content
+            if (!Q('plugin-helloworld-container')) {
+                var html = '<div id="plugin-helloworld-container" style="padding: 20px; color: var(--main-text-color, #000);">';
+                html += '  <h1 style="margin-bottom: 10px;">Hello World!</h1>';
+                html += '  <p style="font-size: 1.1em; opacity: 0.8;">Welcome to your custom MeshCentral dashboard page.</p>';
+                html += '  <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">';
+                html += '  <p>Since the sidebar injection was getting blocked, you successfully reused the native plugin screen!</p>';
+                html += '</div>';
+                
+                // Overwrite the plugin's default landing panel with your layout
+                Q('view-plugin_plugin').innerHTML = html;
+            }
         }
-    },
-
-    // 2. FORCE the tab into the DOM every time MeshCentral updates its state
-    onStateChange: function (state) {
-        // If the side menu exists and our tab is missing, inject it
-        if (Q('desktopNav') && !Q('nav-helloworld')) {
-            QA('desktopNav', '<li id="nav-helloworld" onclick="plugin_plugin.showTab();"><a href="#"><i class="bi bi-globe"></i>Hello World</a></li>');
-        }
-
-        // Keep our tab highlighted if the user is actively viewing it
-        if (window.location.hash === '#helloworld') {
-            plugin_plugin.showTab();
-        }
-    },
-
-    // 3. Handles clean tab visibility toggling
-    showTab: function () {
-        // Hide all native views
-        var views = ['devices', 'account', 'users', 'events', 'intelamt', 'plugins', 'plugin'];
-        for (var i in views) { 
-            if (Q('view-' + views[i])) { Q('view-' + views[i]).style.display = 'none'; } 
-        }
-        
-        // Un-highlight all native side menu tabs
-        var navs = ['devices', 'account', 'users', 'events', 'intelamt', 'plugins', 'plugin'];
-        for (var i in navs) { 
-            if (Q('nav-' + navs[i])) { Q('nav-' + navs[i]).classList.remove('active'); } 
-        }
-
-        // Make our Hello World elements active
-        if (Q('view-helloworld')) { Q('view-helloworld').style.display = 'block'; }
-        if (Q('nav-helloworld')) { Q('nav-helloworld').classList.add('active'); }
-        
-        window.location.hash = '#helloworld';
     }
 };
 
-// Register the frontend plugin handler
+// Register the frontend handler
 MeshServer.registerPlugin('plugin_plugin', plugin_plugin);
