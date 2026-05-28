@@ -1,47 +1,39 @@
 "use strict";
 
-console.log("[Plugin] plugin-ui.js loaded");
+console.log("[PLUGIN] CLIENT JS LOADED");
 
 plugin = {
 
     onWebUIStartupEnd: function () {
 
-        console.log("[Plugin] UI startup");
+        console.log("[PLUGIN] UI READY");
 
-        // Delay because MeshCentral builds UI dynamically
         setTimeout(() => {
 
-            const sidebar = Q('page_leftbar');
+            const sidebar = document.getElementById('page_leftbar');
 
             if (!sidebar) {
-                console.error("Sidebar not found");
+                console.error("[PLUGIN] Sidebar missing");
                 return;
             }
 
-            console.log("Sidebar found");
+            console.log("[PLUGIN] Sidebar found");
 
-            // Avoid duplicates
-            if (Q('LeftMenuHelloWorld')) return;
+            if (document.getElementById('HelloPluginBtn')) return;
 
             const btn = document.createElement('div');
 
-            btn.id = 'LeftMenuHelloWorld';
+            btn.id = 'HelloPluginBtn';
             btn.className = 'lbbutton';
-            btn.title = 'Hello World';
+            btn.innerHTML = '<div class="lbtg">P</div>';
 
-            btn.innerHTML = `
-                <div class="lbtg bi bi-globe"
-                    style="font-size:24px;text-align:center;line-height:40px;">
-                </div>
-            `;
-
-            btn.onclick = function () {
-                alert("PLUGIN WORKS");
+            btn.onclick = () => {
+                alert("PLUGIN BUTTON WORKS");
             };
 
             sidebar.appendChild(btn);
 
-            console.log("Button inserted");
+            console.log("[PLUGIN] Button inserted");
 
         }, 1000);
     }

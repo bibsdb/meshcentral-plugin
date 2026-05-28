@@ -1,21 +1,7 @@
 {
-  "name": "test plugin",
+  "name": "Test Plugin",
   "shortName": "plugin",
-  "version": "0.0.0",
-  "author": "",
-  "description": "a test plugin",
-  "hasAdminPanel": true,
-  "homepage": "https://github.com/bibsdb/meshcentral-plugin",
-  "changelogUrl": "https://raw.githubusercontent.com/bibsdb/meshcentral-plugin/master/changelog.md",
-  "configUrl": "https://raw.githubusercontent.com/bibsdb/meshcentral-plugin/master/config.json",
-  "downloadUrl": "https://github.com/bibsdb/meshcentral-plugin/archive/master.zip",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bibsdb/meshcentral-plugin.git"
-  },
-  "versionHistoryUrl": "https://api.github.com/repos/bibsdb/meshcentral-plugin/tags",
-  "meshCentralCompat": ">=0.4.4-s",
-  "meshcentralWebHooks": {
-    "userInterface": "plugin-ui.js"
-  }
+  "version": "0.0.1",
+  "description": "Test plugin",
+  "hasAdminPanel": true
 }
