@@ -15,12 +15,6 @@ module.exports.plugin = function (parent) {
     var obj = {};
     obj.parent = parent;
     obj.exports = ["onDesktopDisconnect"];
-    
-    // 2. THIS RUNS EVERY TIME A USER REFRESHES/LOGS INTO THE WEB PAGE
-    obj.onWebUIStartupEnd = function(arr) {
-        console.log("[MeshCentral SERVER] onWebUIStartupEnd hook triggered! Injecting plugin-ui.js into user session.");
-        arr.push('meshcentral-plugins/plugin/plugin-ui.js');
-    };
 
     obj.onDesktopDisconnect = function() {  
         writeDeviceEvent(encodeURIComponent(currentNode._id));  
