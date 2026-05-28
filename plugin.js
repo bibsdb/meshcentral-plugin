@@ -6,19 +6,16 @@
 
 "use strict";
 
-// Changed from module.exports.sample to module.exports.plugin
 module.exports.plugin = function (parent) {
     var obj = {};
-    obj.parent = parent; // keep a reference to the parent
-    obj.exports = [
-      "onDesktopDisconnect" // export this function to the web UI
-    ];
+    obj.parent = parent;
+    obj.exports = ["onDesktopDisconnect"];
     
     obj.onDesktopDisconnect = function() {  
         writeDeviceEvent(encodeURIComponent(currentNode._id));  
         Q('d2devEvent').value = Date().toLocaleString()+': '; 
         focusTextBox('d2devEvent');
-    }
+    };
     
     return obj;
-}
+};
