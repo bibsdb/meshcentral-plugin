@@ -1,23 +1,22 @@
+/** * @description MeshCentral Test Plugin
+* @author Your Name
+* @license Apache-2.0
+* @version v0.0.0
+*/
+
 "use strict";
 
-console.log("[PLUGIN] SERVER FILE LOADED");
+console.log("[PLUGIN] loaded");
 
 module.exports.plugin = function (parent) {
 
     var obj = {};
 
-    obj.server_startup = function () {
-        console.log("[PLUGIN] server_startup()");
-    };
+    obj.exports = ["onWebUIStartupEnd"];
 
     obj.onWebUIStartupEnd = function (files) {
-
-        console.log("[PLUGIN] Injecting browser JS");
-
-        files.push({
-            filename: "plugin-ui.js",
-            path: __dirname + "/plugin-ui.js"
-        });
+        console.log("[PLUGIN] injecting UI script");
+        files.push("plugin-ui.js");
     };
 
     return obj;

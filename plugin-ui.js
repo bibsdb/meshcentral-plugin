@@ -1,39 +1,29 @@
 "use strict";
 
-console.log("[PLUGIN] CLIENT JS LOADED");
+console.log("[PLUGIN] client loaded");
 
 plugin = {
 
     onWebUIStartupEnd: function () {
 
-        console.log("[PLUGIN] UI READY");
+        console.log("[PLUGIN] UI ready");
 
         setTimeout(() => {
 
-            const sidebar = document.getElementById('page_leftbar');
+            const bar = document.getElementById("page_leftbar");
+            if (!bar) return;
 
-            if (!sidebar) {
-                console.error("[PLUGIN] Sidebar missing");
-                return;
-            }
+            if (document.getElementById("mybtn")) return;
 
-            console.log("[PLUGIN] Sidebar found");
+            const btn = document.createElement("div");
+            btn.id = "mybtn";
+            btn.className = "lbbutton";
+            btn.innerHTML = "PLUGIN";
+            btn.onclick = () => alert("works");
 
-            if (document.getElementById('HelloPluginBtn')) return;
+            bar.appendChild(btn);
 
-            const btn = document.createElement('div');
-
-            btn.id = 'HelloPluginBtn';
-            btn.className = 'lbbutton';
-            btn.innerHTML = '<div class="lbtg">P</div>';
-
-            btn.onclick = () => {
-                alert("PLUGIN BUTTON WORKS");
-            };
-
-            sidebar.appendChild(btn);
-
-            console.log("[PLUGIN] Button inserted");
+            console.log("[PLUGIN] button added");
 
         }, 1000);
     }
