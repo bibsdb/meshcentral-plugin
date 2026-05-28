@@ -6,6 +6,15 @@
   "description": "a test plugin",
   "hasAdminPanel": true,
   "homepage": "https://github.com/bibsdb/meshcentral-plugin",
+  "changelogUrl": "https://raw.githubusercontent.com/bibsdb/meshcentral-plugin/master/changelog.md",
+  "configUrl": "https://raw.githubusercontent.com/bibsdb/meshcentral-plugin/master/config.json",
+  "downloadUrl": "https://github.com/bibsdb/meshcentral-plugin/archive/master.zip",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bibsdb/meshcentral-plugin.git"
+  },
+  "versionHistoryUrl": "https://api.github.com/repos/bibsdb/meshcentral-plugin/tags",
+  "meshCentralCompat": ">=0.4.4-s",
   "meshcentralWebHooks": {
     "userInterface": "plugin-ui.js"
   }
