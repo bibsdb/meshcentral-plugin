@@ -1,6 +1,6 @@
 "use strict";
 
-console.log("[PLUGIN] client loaded");
+console.log("[PLUGIN] browser script loaded");
 
 plugin = {
 
@@ -8,22 +8,34 @@ plugin = {
 
         console.log("[PLUGIN] UI ready");
 
-        setTimeout(() => {
+        // wait for MeshCentral UI to fully render
+        setTimeout(function () {
 
-            const bar = document.getElementById("page_leftbar");
-            if (!bar) return;
+            const sidebar = document.getElementById("page_leftbar");
+            if (!sidebar) {
+                console.error("[PLUGIN] sidebar not found");
+                return;
+            }
 
-            if (document.getElementById("mybtn")) return;
+            // prevent duplicates
+            if (document.getElementById("plugin-btn")) return;
 
             const btn = document.createElement("div");
-            btn.id = "mybtn";
+            btn.id = "plugin-btn";
             btn.className = "lbbutton";
-            btn.innerHTML = "PLUGIN";
-            btn.onclick = () => alert("works");
+            btn.title = "Plugin";
 
-            bar.appendChild(btn);
+            btn.innerHTML =
+                '<div class="lbtg bi bi-globe" ' +
+                'style="font-size:24px;text-align:center;line-height:40px;"></div>';
 
-            console.log("[PLUGIN] button added");
+            btn.onclick = function () {
+                alert("Plugin button clicked!");
+            };
+
+            sidebar.appendChild(btn);
+
+            console.log("[PLUGIN] sidebar button added");
 
         }, 1000);
     }
